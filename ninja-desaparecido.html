@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Funciones básicas jQuery</title>
+	<style>
+        .contenedor {width: 740px; margin: auto;}
+        .cuadro {width: 150px; padding: 15px; display: inline-block;}
+        button {margin: 10px 30px;}
+
+    </style>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("img").click(function(){
+				$(this).hide("slow");
+			});
+           
+            $("#restaurar").click(function(){
+				$("img").show();
+			});
+		});
+	</script>
+</head>
+<body>
+	<div class="contenedor">
+		<div class="cuadro">
+            <img src="http://kmm.cl/blog/wp-content/uploads/2019/04/014-2-150x150.png">
+		</div>
+        <div class="cuadro">
+            <img src="http://kmm.cl/blog/wp-content/uploads/2019/04/014-2-150x150.png">
+		</div>	
+        <div class="cuadro">
+            <img src="http://kmm.cl/blog/wp-content/uploads/2019/04/014-2-150x150.png">
+		</div>	<div class="cuadro">
+            <img src="http://kmm.cl/blog/wp-content/uploads/2019/04/014-2-150x150.png">
+		</div>
+        <div class="cuadro">
+            <img src="http://kmm.cl/blog/wp-content/uploads/2019/04/014-2-150x150.png">
+		</div>
+        <div class="cuadro">
+            <img src="http://kmm.cl/blog/wp-content/uploads/2019/04/014-2-150x150.png">
+		</div>	
+        <div class="cuadro">
+            <img src="http://kmm.cl/blog/wp-content/uploads/2019/04/014-2-150x150.png">
+		</div>	<div class="cuadro">
+            <img src="http://kmm.cl/blog/wp-content/uploads/2019/04/014-2-150x150.png">
+		</div>
+        <button id="restaurar">Restaurar</button>
+        
+	</div>
+</body>
+</html>
