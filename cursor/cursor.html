@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Cursor En/Fuera</title>
+	
+     <style>
+         
+    .contenedor{
+	width: 1200px;
+	margin: auto;
+    }
+         
+         img{
+             width: 250px;
+         }
+         
+    .imagen{
+        width: 250px;
+        padding: 40px 15px;
+        display: inline-block;
+    }
+    .imagen1{
+        display: block;
+    }
+    .imagen2{
+        display: none;
+    }
+    
+    </style>
+
+    
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$(".imagen").hover(function(){
+				$(".imagen2", this).css("display", "block");
+				$(".imagen1", this).css("display", "none");
+			},
+			function(){
+				$(".imagen1", this).css("display", "block");
+				$(".imagen2", this).css("display", "none");
+			});
+		});
+	</script>
+    
+   
+</head>
+
+<body>
+	<div class="contenedor">
+		<div class="imagen">
+			<img class="imagen1" src="bici-1a.jpg">
+			<img class="imagen2" src="bici-1b.jpg">
+		</div>
+		<div class="imagen">
+			<img class="imagen1" src="bici-2a.jpg">
+			<img class="imagen2" src="bici-2b.jpg">
+		</div>
+		<div class="imagen">
+			<img class="imagen1" src="bici-3a.jpg">
+			<img class="imagen2" src="bici-3b.jpg">
+		</div>
+		<div class="imagen">
+			<img class="imagen1" src="bici-4a.jpg">
+			<img class="imagen2" src="bici-4b.jpg">
+		</div>		
+	</div>
+
+</body>
+</html>
