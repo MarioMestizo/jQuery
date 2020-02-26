@@ -1,0 +1,203 @@
+<!-- $(document).ready(function() {
+    $('form').submit(function() {
+        // your code here (build up your url)
+        $.get(url, function(res) {
+            // your code here
+        }, 'json');
+        // don't forget to return false so the page doesn't refresh
+        return false;
+    });
+}); -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>El Tiempo</title>
+    <style>
+        .contenedor{
+            width: 1000px;
+            margin: 40px auto;
+            border: solid black 1px;
+          
+        }
+        .info{
+            width: 960px;
+            margin: 15px auto;
+        }
+        .left{
+            width: 400px;
+            height: 435px;
+            display: inline-block;
+            vertical-align: top;
+            border: solid 1px gray;
+            background-color: royalblue;
+        }
+        #name{
+            margin: 0px;
+            padding: 0px;
+            width: 430px;
+            height: 100px;
+            display: inline-block;
+        }
+        #name h3{
+            margin: 0px;
+            padding: 35px;
+            text-align: center;
+            font-family: verdana;
+            font-size: 32px;
+            color: white;
+            opacity: 0.8;
+        }
+        #icon{
+            width: 230px;
+            height: 230px;
+            margin-left: 95px;
+            background-size: contain;
+        }
+        #icon p{
+            width: 230px;
+            margin: 0px;
+            padding: 0px;
+            margin-top: 95px;
+            display: inline-block;
+            color: rgb(230, 230, 55);
+            font-size: 42px;
+            font-weight: 600;
+            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+            text-align: center;
+        }
+        #desc{
+            margin: 0px;
+            padding: 0px;
+            width: 430px;
+            height: 100px;
+            display: inline-block;
+        }
+        #desc h2{
+            width: 435px;
+            margin: 0px;
+            padding: 0px;
+            display: inline-block;
+            vertical-align: top;
+            font-family: verdana;
+            font-size: 24px;
+            font-weight: 400;
+            color: white;
+            text-align: center;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+        .right{
+            width: 530px;
+            height: 435px;
+            margin-left: 22px;
+            display: inline-block;
+            border: solid 1px gray;
+            background-color: royalblue;
+        }
+        .right p{
+            margin:0px;
+            padding-top: 25px;
+            width: 530px;
+            height: 60px;
+            display: inline-block;
+            text-indent: 10px;
+            font-family: verdana;
+            font-size: 24px;
+            font-weight: 600;
+            color: white;
+        }
+        .right p span{
+            color: rgb(230, 230, 55);
+        }
+        form{
+           width: 400px;
+            margin: 35px auto;
+        }
+        .city{
+            width: 230px;
+            height: 30px;
+            border-radius: 5px;
+            font-size: 22px;
+            font-weight: 400;
+            color: darkblue;
+            text-indent: 10px;
+            text-transform: capitalize;
+        }
+    
+    </style>
+<!-- 	api-key: 7f6342e906c57621d95e7d3dcf2fb935 -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('form').submit(function(){
+				var ciudad = $('.city').val();
+				var url = 'http://api.openweathermap.org/data/2.5/weather?q='+ciudad+'&lang=es&units=metric&appid=7f6342e906c57621d95e7d3dcf2fb935';
+				$.get(url, function(city){
+					// console.log(city);
+					$('#name h3').remove();
+					$('#name').append('<h3>'+city.name+'</h3>');
+				
+                $.get(url, function(icono){
+					var url2 = 'http://openweathermap.org/img/wn/'+icono.weather[0].icon+'@2x.png';
+					$('#icon img').remove();
+					$('#icon').css('background-image', 'url("'+url2+'")');
+					$('#desc h2').remove();
+					$('#desc').append('<h2>'+icono.weather[0].description+'</h2>');
+					$('#icon p').remove();
+					$('#icon').append('<p>'+Math.round(icono.main.temp)+' °C</p>');
+				});
+
+				$.get(url, function(data){
+					$('#max').remove();
+					$('.right').append('<p id="max">Temperatura Máxima: <span>'+Math.round(data.main.temp_max)+' °C</span></p>');
+					$('#min').remove();
+					$('.right').append('<p id="min">Temperatura Mínima: <span>'+Math.round(data.main.temp_min)+' °C</span></p>');
+					$('#sens').remove();
+					$('.right').append('<p id="sens">Sensación Térmica: <span>'+Math.round(data.main.feels_like)+' °C</span></p>');
+					$('#presion').remove();
+					$('.right').append('<p id="presion">Presión Atmosférica: <span>'+data.main.pressure+' hpa</span></p>');
+					$('#humedad').remove();
+					$('.right').append('<p id="humedad">Humedad: <span>'+data.main.humidity+'%</span></p>');
+				});
+				}, 'json');
+				return false;
+			});
+
+		});
+	</script>
+
+</head>
+<body>
+	<div class="contenedor">
+		<form>
+			<input type="text" class="city">
+			<input type="submit" value="Consulta">
+			<input type="reset" value="Reset">
+		</form>
+		<div class="info">
+			<div class="left">
+				<div id="name">
+					<h3></h3>
+				</div>
+				<div id="icon">
+					<p></p>
+				</div>
+				<div id="desc">
+					<h2></h2>
+				</div>
+				
+			</div>
+			<div class="right">
+				<p id="max"></p>
+				<p id="min"></p>
+				<p id="sens"></p>
+				<p id="presion"></p>
+				<p id="humedad"></p>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
