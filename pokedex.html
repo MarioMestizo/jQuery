@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>PokeDex</title>
+    
+    <style>
+    
+.contenedor{
+	width: 1240px;
+	height: auto;
+}
+.pokemones{
+	width: 960px;
+	height: auto;
+}
+.pokemones img{
+	width: 100px;
+	height: 95px;
+	margin-left: 5px;
+	
+}
+.tabla{
+	width: 240px;
+	height: 430px;
+	position: fixed;
+	top: 20px;
+	left: 980px;
+	border: solid red 10px;
+	
+	
+}
+.tabla h5{
+	margin: 15px;
+	text-align: center;
+	color: white;
+	font-style: italic;
+}
+#name{
+	width: 220px;
+	margin-left: 10px;
+	margin-top: 10px;
+	border: solid red 1px;
+	
+}
+#name h3{
+	text-align: center;
+	text-transform: uppercase;
+	color: black;
+    font-size: 20px; 
+}
+        
+#imagen{
+	width: 100px;
+	height: 100px;
+	margin: 20px auto;
+	
+}
+#imagen img{
+	width: 100px;
+	height: 100px;
+	
+}
+#info{
+	
+	margin-top: 10px;
+	margin-left: 10px;
+	
+}
+#info h4{
+	margin: 10px;
+}
+#tipos ul{
+	margin: 5px 0px;
+}
+#type-list{
+	height: 50px;
+}
+#altura{
+	
+	height: 50px;
+}
+#peso{
+
+	height: 50px;
+}
+p{
+	margin: 10px;
+	
+}
+    
+    </style>
+    
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			for(i=1; i<=756; i++){
+				$('.pokemones').append('<img id="'+i+'" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/'+i+'.png">');
+			}
+			
+			$(document).on('click', 'img', function(){
+				var pokemon = $(this).attr('id');
+				$.get("https://pokeapi.co/api/v2/pokemon/"+pokemon+"/", function(nombre){
+					$('h3').remove();
+					$('#name').append('<h3>'+nombre.name+'</h3>');
+					});
+				$('#imagen img').remove();
+				$('#imagen').append('<img src= "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/'+pokemon+'.png">');
+				$.get("https://pokeapi.co/api/v2/pokemon/"+pokemon+"/", function(tipos){
+					$('li').remove();
+					for(i=0; i<tipos.types.length; i++){
+						$('#type-list').append('<li>'+tipos.types[i].type.name+'</li>');
+					}
+				});
+				$.get("https://pokeapi.co/api/v2/pokemon/"+pokemon+"/", function(alt){
+					$('#altura p').remove();
+					$('#altura').append('<p>'+alt.height+'</p>');
+				});
+					$.get("https://pokeapi.co/api/v2/pokemon/"+pokemon+"/", function(peso){
+					$('#peso p').remove();
+					$('#peso').append('<p>'+peso.weight+'</p>');
+				});
+			});
+		});
+			
+
+	</script>
+</head>
+
+<body>
+	<div class="contenedor">
+		<div class="pokemones">
+			
+		</div>
+		<div class="tabla">
+			<div id="name">
+				<h3>Elige tu Pokemón</h3>
+			</div>
+			<div id="imagen"></div>
+			<div id="info">
+				<div id="tipos">
+					<h4>Tipo:</h4>
+					<ul id="type-list"></ul>
+				</div>
+				<div id="altura">
+					<h4>Altura:</h4>
+				</div>
+				<div id="peso">
+					<h4>Peso:</h4>
+				</div>
+			</div>
+			
+		</div>
+		
+	</div>
+
+</body>
+
+</html>
